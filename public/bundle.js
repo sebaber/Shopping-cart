@@ -720,6 +720,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //IMPORT ACTIONS
 var middleware = (0, _redux.applyMiddleware)(_reduxLogger2.default);
+
 //IMPORT COMBINED REDUCERS
 
 var store = (0, _redux.createStore)(_index2.default, middleware);
