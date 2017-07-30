@@ -9,6 +9,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 //IMPORT COMBINED REDUCERS
 import reducers from './reducers/index';
@@ -17,8 +18,7 @@ import reducers from './reducers/index';
 import {addToCart} from './actions/cartActions';
 import {postBooks, deleteBooks, updateBooks} from './actions/booksActions';
 
-// STEP 1 create the store
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(thunk, logger);
 const store = createStore(reducers, middleware);
 
 import BooksList from './components/pages/booksList';
@@ -41,36 +41,3 @@ const Routes = (
 render(
   Routes, document.getElementById('app')
 );
-
-// STEP 2 create and dispatch actions
-//-->> BOOKS ACTIONS <<--
-// //POST
-// store.dispatch(postBooks(
-//   [
-//     {
-//       id: 1,
-//       title: "1st book",
-//       description: "this is the 1st book",
-//       price: 33.33
-//     },
-//     {
-//       id: 2,
-//       title: "2nd book",
-//       description: "this is the 2nd book",
-//       price: 33.33
-//     }
-//   ])
-// );
-
-// //DELETE
-// store.dispatch(deleteBooks({id:1}));
-//
-// //UPDATE
-// store.dispatch(updateBooks({
-//   id:2,
-//   title:"2nd book updated"
-// }));
-//
-// //-->> CART ACTIONS <<--
-// //ADD to cart
-// store.dispatch(addToCart([{id: 1}]));

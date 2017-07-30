@@ -2,6 +2,12 @@
 //CART REDUCERS
 export function cartReducers(state={cart:[]}, action){
   switch (action.type) {
+    case "GET_CART":
+    return {...state,
+      cart: action.payload,
+      totalAmount: totals(action.payload).amount,
+      totalQty: totals(action.payload).qty
+    };
     case "ADD_TO_CART":
     return {...state,
       cart: action.payload,
@@ -9,31 +15,10 @@ export function cartReducers(state={cart:[]}, action){
       totalQty: totals(action.payload).qty
     };
     case "UPDATE_CART":
-    //Create a copy of current array of cart
-    const currentUpdateCart = [...state.cart];
-    // Determine at wich index in cart is the book to be deleted
-    const indexToUpdate = currentUpdateCart.findIndex(
-      function(cart){
-        return cart._id === action._id;
-      }
-    );
-    //Create cart update
-    const newCartUpdated = {
-      ...currentUpdateCart[indexToUpdate],
-       quantity: currentUpdateCart[indexToUpdate].quantity + action.unit
-     };
-    //use slice to remove the book
-    let cartUpdate = [
-        //From beginning to indexToDelete(not included)
-        ...currentUpdateCart.slice(0, indexToUpdate),
-        newCartUpdated,
-        //From indexToDelete+1 to final
-        ...currentUpdateCart.slice(indexToUpdate+1)
-    ];
     return {...state,
-      cart:cartUpdate,
-      totalAmount: totals(cartUpdate).amount,
-      totalQty: totals(cartUpdate).qty
+      cart: action.payload,
+      totalAmount: totals(action.payload).amount,
+      totalQty: totals(action.payload).qty
     };
     case "DELETE_CART_ITEM":
     return {...state,

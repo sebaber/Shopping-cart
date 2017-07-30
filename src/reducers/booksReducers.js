@@ -3,28 +3,23 @@
 // BOOKS REDUCERS
 export function booksReducers(
   state={
-    books:[
-      {
-        _id: 1,
-        title: "1st book",
-        description: "this is the 1st book",
-        price: 43.33
-      },
-      {
-        _id: 2,
-        title: "2nd book",
-        description: "this is the 2nd book",
-        price: 53.33
-      }
-    ]
+    books:[]
   },
   action){
   switch (action.type) {
     case "GET_BOOKS":
-    return {...state, books:[...state.books]};
+    return {...state, books:[...action.payload]};
 
     case "POST_BOOK":
-    return {books: [...state.books, ...action.payload]};
+    return {...state,
+      books: [...state.books, ...action.payload],
+      msg:'Saved! Click to continue',
+      style:'success',
+      validation:'success'
+    };
+
+    case "POST_BOOK_REJECTED":
+    return {...state, msg:'Please, try again', style:'danger', validation:'error'};
 
     case "DELETE_BOOK":
     //Create a copy of current array of books
@@ -69,6 +64,10 @@ export function booksReducers(
         ...currentUpdateBooks.slice(indexToUpdate+1)
       ]
     };
+
+    case "RESET_BUTTON":
+    return {...state, msg:null, style:'primary', validation:null};
+    break;
   };
   return state;
 };
