@@ -1,20 +1,23 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
+// var logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //APIs
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/bookshop');
+//MONGO LAB
+mongoose.connect('mongodb://testUser:test@ds149049.mlab.com:49049/bookshop');
+//LOCAL DB
+// mongoose.connect('mongodb://localhost:27017/bookshop');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '# MongoDB - connection error: '));

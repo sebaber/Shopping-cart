@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www & node apiServer.js"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
@@ -21,6 +21,7 @@
     "connect-mongo": "^1.3.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
     "express-session": "^1.15.4",
     "http-proxy": "^1.16.2",
